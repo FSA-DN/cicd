@@ -1,5 +1,5 @@
-# Use the official OpenJDK 21 base image
-FROM openjdk:21-jdk-slim AS build
+# Use Amazon Corretto 21 as the base image for building
+FROM amazoncorretto:21 AS build
 
 # Set the working directory
 WORKDIR /app
@@ -11,8 +11,8 @@ COPY src ./src
 # Build the application
 RUN ./mvnw clean package -DskipTests
 
-# Use a new image for the runtime
-FROM openjdk:21-jre-slim
+# Use a smaller base image for the final image
+FROM amazoncorretto:21-jre
 
 # Set the working directory
 WORKDIR /app
