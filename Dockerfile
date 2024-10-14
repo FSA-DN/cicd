@@ -1,5 +1,5 @@
 # Use Amazon Corretto 21 as the base image for building
-FROM maven:3.8.6-eclipse-temurin-21 AS build
+FROM maven:3.8.6-openjdk-21 AS build
 
 # Set the working directory
 WORKDIR /app
@@ -12,7 +12,7 @@ COPY src ./src
 RUN ./mvnw clean package -DskipTests
 
 # Use a smaller base image for the final image
-FROM eclipse-temurin:21
+FROM maven:3.8.6-openjdk-21
 
 # Set the working directory
 WORKDIR /app
