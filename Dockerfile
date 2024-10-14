@@ -1,5 +1,5 @@
 # Use Amazon Corretto 21 as the base image for building
-FROM amazoncorretto:21 AS build
+FROM amazoncorretto:21-alpine AS build
 
 # Set the working directory
 WORKDIR /app
@@ -12,7 +12,7 @@ COPY src ./src
 RUN ./mvnw clean package -DskipTests
 
 # Use a smaller base image for the final image
-FROM amazoncorretto:21-jre
+FROM amazoncorretto:21-alpine
 
 # Set the working directory
 WORKDIR /app
