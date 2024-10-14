@@ -12,7 +12,7 @@ COPY src ./src
 RUN ./mvnw clean package -DskipTests
 
 # Use a smaller base image for the final image
-FROM maven:3.8.6-openjdk-21
+FROM openjdk:21-jre-slim
 
 # Set the working directory
 WORKDIR /app
