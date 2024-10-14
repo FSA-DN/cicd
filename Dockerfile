@@ -1,27 +1,26 @@
-# Use Amazon Corretto 21 as the base image for building
-FROM maven:3.8.6-eclipse-temurin-21 AS build
+# Use the official Maven image as a parent image
+FROM maven:3.8.4-openjdk-17-slim AS build
 
-# Set the working directory
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy the Maven pom.xml and the source code
+# Copy the pom.xml file
 COPY pom.xml .
+
+# Copy the project source
 COPY src ./src
 
-# Build the application
-RUN ./mvnw clean package -DskipTests
+# Package the application
+RUN mvn clean package -DskipTests
 
-# Use a smaller base image for the final image
-FROM eclipse-temurin:21
+# Use OpenJDK for running the application
+FROM openjdk:17-jdk-slim
 
-# Set the working directory
+# Set the working directory in the container
 WORKDIR /app
 
-# Copy the built jar file from the build stage
+# Copy the jar file from the build stage
 COPY --from=build /app/target/*.jar app.jar
 
-# Expose the port your application runs on (default for Spring Boot is 8080)
-EXPOSE 8080
-
-# Command to run the application
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Specify the command to run on container start
+CMD ["java", "-jar", "app.jar"]
