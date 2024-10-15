@@ -9,7 +9,7 @@ public class HomeController {
 
     @GetMapping("/")
     public String home(Model model) {
-        model.addAttribute("message", "Welcome to My Spring Boot Application!!!");
+        model.addAttribute("message", "Welcome to FPT");
         return "home";
     }
 }
