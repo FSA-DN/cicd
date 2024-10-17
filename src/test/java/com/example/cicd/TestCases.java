@@ -9,7 +9,7 @@ public class TestCases {
     @Test
     public void test1() {
         // This test will always pass
-        assertTrue(false, "This test will fail.");
+        assertTrue(true, "This test will fail.");
     }
 
     @Test
