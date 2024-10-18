@@ -21,6 +21,6 @@ public class TestCases {
     @Test
     public void test3() {
         // This test will always pass
-        assertTrue(true, "This test always passes.");
+        assertTrue(false, "This test always passes.");
     }
 }
